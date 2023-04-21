@@ -1,0 +1,33 @@
+{% load bgfilters %}
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary static-top">
+    <div class="container ">
+        <a class="navbar-brand" href="{% url 'posts:index' %}">Blog</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                {% categories_on_navbar %}
+            </ul>
+            {% if not request.user.is_authenticated %}
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'accounts:login' %}">Login</a>
+                </li>
+            </ul>
+            {% else %}
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'accounts:logout' %}">Logout</a>
+                </li>
+            </ul>
+            {% endif %}
+            <form class="form-inline my-2 my-lg-0 ml-lg-4" action="/busca/">
+                <input name="termo" value="" class="form-control mr-sm-2" type="search" placeholder="Pesquisar"
+                       aria-label="Search">
+            </form>
+        </div>
+    </div>
+</nav>
